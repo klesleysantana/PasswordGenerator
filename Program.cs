@@ -1,10 +1,21 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.IO;
+using System.Text;
 
 namespace PasswordGenerator
 {
+    public static class PasswordSets
+    {
+        public static readonly string Number = "0123456789";
+        public static readonly string Uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public static readonly string Lowercase = "abcdefghijklmnopqrstuvwxyz";
+        public static readonly string Special = "!@#$%^?*()[]{}|;:~";
+    }
+
+    
     class Program
     {
         private static bool DataEntries(string type)
@@ -36,6 +47,13 @@ namespace PasswordGenerator
             {
                 Console.Write("Erro! Digit a valid value: ");
             }
+            
+            StringBuilder pool = new StringBuilder();
+            pool.Append(PasswordSets.Lowercase);
+
+            if (chooseNumbers) pool.Append(PasswordSets.Number);
+            if (chooseSpecialCharacters) pool.Append(PasswordSets.Special);
+            if (chooseUppercaseLetters) pool.Append(PasswordSets.Uppercase);          
 
         }
     }
